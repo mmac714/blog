@@ -1,0 +1,39 @@
+{% extends "blogs/base.html" %}
+
+{% block header %}
+
+<div class="container-fluid-right">
+  
+  <h1>
+    <div>
+      Your Blog //
+      <a href="{% url 'blogs:new_post' %}">
+        Add a new post
+      </a>
+    </div>
+  </h1>
+
+</div>
+
+{% endblock header %}
+
+
+{% block content %}
+
+  <ul>
+  	{% for post in posts %}
+  	  <li>
+  	  	<p>{{ post }} - {{ post.date_added|date:'M d, Y H:i' }}</p>
+        <p>    {{ post.text|linebreaks }}</p>
+        <p>
+          <a href="{% url 'blogs:edit_post' post.id %}">edit post</a>
+        </p>
+  	  </li>
+  	{% empty %}
+  	  <li>No topics have been added yet.</li>
+  	{% endfor %}
+  </ul>
+
+  <a href="{% url 'blogs:new_post' %}">Add a new post</a>
+
+{% endblock content %}
